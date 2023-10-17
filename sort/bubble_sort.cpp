@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 
     for (size_t l = a.size(); l > 0; l--)
     {
-        for (size_t i = 0; i < l-1; i++)  // let the biggest at least
+        for (size_t i = 0; i < l-1; i++)  // let the biggest on lie at least
         {
             if(a.at(i) > a.at(i+1))
             {
