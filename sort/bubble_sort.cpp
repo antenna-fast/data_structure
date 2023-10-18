@@ -13,9 +13,9 @@ int main(int argc, char** argv) {
     
     vector<int> a{5,4,2,3,8,7,9,0};
 
-    for (size_t l = a.size(); l > 0; l--)
+    for (size_t l = a.size()-1; l > 0; l--)
     {
-        for (size_t i = 0; i < l-1; i++)  // let the biggest on lie at least
+        for (size_t i = 0; i < l; i++)  // let the biggest on lie at least
         {
             if(a.at(i) > a.at(i+1))
             {
@@ -31,6 +31,6 @@ int main(int argc, char** argv) {
     {
         cout << a.at(i) << endl;
     }
-        
+    
     return 0;
 }
