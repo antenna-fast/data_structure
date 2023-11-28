@@ -9,7 +9,8 @@ using namespace std;
 
 
 // 进队列
-int enQueue(int *a, int val, int rear){
+int enQueue(int *a, int val, int rear)
+{
     rear ++;
     a[rear] = val;
     return rear;

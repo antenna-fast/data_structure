@@ -9,14 +9,16 @@ using namespace std;
 
 
 // 进队列
-int enQueue(int *a, int val, int rear){
+int enQueue(int *a, int val, int rear)
+{
     rear ++;
     a[rear] = val;
     return rear;
 }
 
 // 出队列
-int deQueue(int *a, int head, int rear){
+int deQueue(int *a, int head, int rear)
+{
     if (head == rear){
         cout << "Empty Queue" << endl;
         return -1;

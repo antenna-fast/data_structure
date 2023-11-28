@@ -8,8 +8,10 @@
 using namespace std;
 
 // 单向链表
+
 // define a Node
-typedef struct Node{
+typedef struct Node
+{
     int value;
     Node *next;  // 包含对自身引用的类型，称作自引用数据类型或自引用数据结构
 } Node;
@@ -19,11 +21,13 @@ typedef struct Node{
 // Init 构造一个空的线性表
 
 // Destroy TODO
-bool destroyList(Node *head){
+bool destroyList(Node *head)
+{
     Node *p = head;
     Node *pr = nullptr;
 
-    while (p){
+    while (p)
+    {
         pr = p;  // 保存当前结点
         p = p -> next;  // 更新游走指针
         free(pr);  // 删除当前的结点
@@ -34,10 +38,13 @@ bool destroyList(Node *head){
 }
 
 // 插入(没有头结点的情况)
-Node * insertElem(Node *head, int i, int value){
+Node *insertElem(Node *head, int i, int value)
+{
     Node *tmp = head;  // 游走的指针
+
     // 第一个位置插入
-    if (i == 1){
+    if (i == 1)
+    {
         // 创建结点
         Node *newNode = new Node;
         newNode -> value = value;
@@ -48,44 +55,53 @@ Node * insertElem(Node *head, int i, int value){
     }
 
     // 其他位置插入
-    else {
-        // 找到node(i-1)
-        for (int j = 1; j < i - 1; ++j) {
+    else 
+    {
+        // find node(i-1)
+        // for example, if i == 2, not move tmp, and tmp still is head (node1)
+        // if i == 3, move tmp one step, and tmp is node2
+        for (int j = 1; j < i - 1; ++j)
+        {
             // 判断是否越界
-            if(tmp == nullptr){
+            if(tmp == nullptr)
+            {
                 cout << "out of index!" << endl;
                 return head;
             }
-            tmp = tmp->next;
+            tmp = tmp->next;  // move tmp
         }
 
         // 创建新的node
         Node *newNode = new Node;
         newNode->value = value;
         // 插入
-        newNode -> next = tmp -> next;
-        tmp -> next = newNode;
+        newNode->next = tmp->next;  // tail part
+        tmp->next = newNode;
         return head;
     }
 }
 
 
 // 删除位置i的元素
-Node * deleteElem(Node *head, int i){
+Node * deleteElem(Node *head, int i)
+{
     Node *tmp = head;
 
     // 删除第一个
-    if (i == 1){
+    if (i == 1)
+    {
         Node *del = tmp;  // 保存要删除的结点
         tmp = tmp->next;  // 执行跳转
         free(del);  // 释放删除结点的内存
         return tmp;
     }
 
-    else{
+    else
+    {
         // 找到前驱结点(i-1) tmp
         int counter = 1;
-        while (counter < i - 1){
+        while (counter < i - 1)
+        {
             counter ++;
             tmp = tmp -> next;
         }
@@ -97,10 +113,12 @@ Node * deleteElem(Node *head, int i){
 }
 
 // 链表长度
-bool ListLength(Node *p, int &length){
+bool ListLength(Node *p, int &length)
+{
     Node *tmp = p;
     length = 0;
-    while (tmp){
+    while (tmp)
+    {
         length += 1;
         tmp = tmp -> next;
     }
@@ -108,11 +126,15 @@ bool ListLength(Node *p, int &length){
 }
 
 // 遍历链表
-void displayList(Node *p){
+void displayList(Node *p)
+{
     Node *tmp = p;
-    while (tmp){
-        cout << "value: " << tmp->value << endl;
+    int idx = 0;
+    while (tmp)
+    {
+        cout << "idx: " << idx << " value: " << tmp->value << endl;
         tmp = tmp->next;
+        idx ++;
     }
 }
 
@@ -135,7 +157,8 @@ void UnioxList(){
 // 双向链表
 
 // define a Node
-typedef struct BiNode{
+typedef struct BiNode
+{
     int value;
     BiNode *last;
     BiNode *next;
@@ -145,8 +168,8 @@ typedef struct BiNode{
 // 循环链表
 
 
-int main(){
-
+int main()
+{
     // 创建一个链表
     Node *head = nullptr;  // 创建头指针(NULL)
 
@@ -162,24 +185,27 @@ int main(){
     Node *secondNode = new Node;
     secondNode->value=123;
     secondNode->next = nullptr;
-    firstNode->next = secondNode;  // 第一个结点指向第二个结点
+    
+    // 第一个结点指向第二个结点
+    firstNode->next = secondNode; 
 
-    cout << head->value << endl;
-    cout << head->next->value << endl;
+    cout << "head: " << head->value << endl;
+    cout << "head->next: " << head->next->value << endl;
 
-    // 在后面插入结点
+    // init tmp node
     Node *tmpNode = secondNode;
 
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 5; ++i)
+    {
         Node *newNode = new Node;  // 创建结点
         newNode->value = i;
         newNode->next = nullptr;
 
         tmpNode->next = newNode;
-        tmpNode = newNode;
+        tmpNode = newNode;  // update tmp node
     }
 
-    head = insertElem(head, 1, 999);
+    head = insertElem(head, 2, 999);
 //    cout << "insert state: " << state << endl;
 
     // 遍历list
