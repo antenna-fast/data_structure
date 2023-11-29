@@ -14,6 +14,9 @@ typedef struct Node
 {
     int value;
     Node *next;  // 包含对自身引用的类型，称作自引用数据类型或自引用数据结构
+
+    Node(int val) : value(val), next(nullptr) {}  // constructure
+
 } Node;
 
 
@@ -38,7 +41,7 @@ bool destroyList(Node *head)
 }
 
 // 插入(没有头结点的情况)
-Node *insertElem(Node *head, int i, int value)
+void insertElem(Node* &head, int i, int value)
 {
     Node *tmp = head;  // 游走的指针
 
@@ -51,13 +54,12 @@ Node *insertElem(Node *head, int i, int value)
         // 插入
         newNode -> next = head;
         head = newNode;  // update head address
-        return head;
     }
 
     // 其他位置插入
     else 
     {
-        // find node(i-1)
+        // prepare insert position's prior node node(i-1)
         // for example, if i == 2, not move tmp, and tmp still is head (node1)
         // if i == 3, move tmp one step, and tmp is node2
         for (int j = 1; j < i - 1; ++j)
@@ -66,7 +68,7 @@ Node *insertElem(Node *head, int i, int value)
             if(tmp == nullptr)
             {
                 cout << "out of index!" << endl;
-                return head;
+                // return head;
             }
             tmp = tmp->next;  // move tmp
         }
@@ -77,7 +79,7 @@ Node *insertElem(Node *head, int i, int value)
         // 插入
         newNode->next = tmp->next;  // tail part
         tmp->next = newNode;
-        return head;
+        // return head;
     }
 }
 
@@ -87,10 +89,16 @@ Node * deleteElem(Node *head, int i)
 {
     Node *tmp = head;
 
+    if(tmp == nullptr)
+    {
+        cout << "empty list!" << endl;
+        return tmp;
+    }
+
     // 删除第一个
     if (i == 1)
     {
-        Node *del = tmp;  // 保存要删除的结点
+        Node *del = tmp;  // buf要删除的结点
         tmp = tmp->next;  // 执行跳转
         free(del);  // 释放删除结点的内存
         return tmp;
@@ -104,6 +112,11 @@ Node * deleteElem(Node *head, int i)
         {
             counter ++;
             tmp = tmp -> next;
+            if(tmp->next == nullptr)  // if delete node is empty
+            {
+                cout << "over length" << endl;
+                return nullptr;
+            }
         }
         Node *del = tmp -> next;  // del buffer
         tmp -> next = tmp -> next -> next;
@@ -144,7 +157,8 @@ void displayList(Node *p)
 
 // eg 2.1
 // A = A \cup B
-void UnioxList(){
+void UnioxList()
+{
 
 }
 
@@ -154,24 +168,19 @@ void UnioxList(){
 // 反转链表
 
 
-// 双向链表
-
-// define a Node
-typedef struct BiNode
-{
-    int value;
-    BiNode *last;
-    BiNode *next;
-} BiNode;
-
-
-// 循环链表
-
 
 int main()
 {
     // 创建一个链表
+    // Node *head = new Node;
     Node *head = nullptr;  // 创建头指针(NULL)
+
+    for (size_t i = 1; i < 3; i++)
+    {
+        insertElem(head, i, i);
+    }
+
+    displayList(head);    
 
     // 创建首结点
     Node *firstNode = new Node;
@@ -192,6 +201,10 @@ int main()
     cout << "head: " << head->value << endl;
     cout << "head->next: " << head->next->value << endl;
 
+    // delete
+    // Node *del = deleteElem(head, 2);  // ok
+    // Node *del = deleteElem(head, 3);  // overlength
+
     // init tmp node
     Node *tmpNode = secondNode;
 
@@ -205,8 +218,10 @@ int main()
         tmpNode = newNode;  // update tmp node
     }
 
-    head = insertElem(head, 2, 999);
+    // insert
+    insertElem(head, 2, 999);
 //    cout << "insert state: " << state << endl;
+
 
     // 遍历list
     displayList(head);
@@ -216,7 +231,8 @@ int main()
     ListLength(head, length);
     cout << "length: " << length << endl;
 
-    head = deleteElem(head, 3);
+    // head = deleteElem(head, 3);
+
     // 遍历list
     displayList(head);
     ListLength(head, length);

@@ -1,6 +1,7 @@
 //
 // Created by yaohua on 2022/5/2.
 //
+// Queue: First In First Out 
 // array implementation of queue
 
 #include <iostream>
@@ -9,7 +10,7 @@ using namespace std;
 
 
 // 进队列
-int enQueue(int *a, int val, int rear)
+int push(int *a, int val, int rear)
 {
     rear ++;
     a[rear] = val;
@@ -17,8 +18,10 @@ int enQueue(int *a, int val, int rear)
 }
 
 // 出队列
-int deQueue(int *a, int head, int rear){
-    if (head == rear){
+int pop(int *a, int head, int rear)
+{
+    if (head == rear)
+    {
         cout << "Empty Queue" << endl;
         return -1;
     }

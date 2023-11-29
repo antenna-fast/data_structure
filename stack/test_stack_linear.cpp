@@ -9,7 +9,8 @@ using namespace std;
 
 // OPERATIONS
 // Push
-int push(int *a, int top, int elem){
+int push(int *a, int top, int elem)
+{
     top ++;
     a[top] = elem;
     cout << "top: " << top << endl;
@@ -17,8 +18,10 @@ int push(int *a, int top, int elem){
 }
 
 // Pop
-int pop(int *a, int top){
-    if (top == -1){
+int pop(int *a, int top)
+{
+    if (top == -1)
+    {
         cout << "ERROR: EMPTY STACK" << endl;
         return -1;
     }
@@ -27,7 +30,8 @@ int pop(int *a, int top){
     return top;
 }
 
-int main(){
+int main()
+{
     // init
     int a[100];
     int top = -1;
