@@ -34,7 +34,8 @@ int main(){
     cout << "length_1: " << length_1 << endl;
     cout << "length_2: " << length_2 << endl;
 
-    if (length_1 + length_2 > 10){
+    if (length_1 + length_2 > 10)
+    {
         str_var_1 = (char*)realloc(str_var_1, (length_1 + length_2 + 1) * sizeof(char));
     }
 

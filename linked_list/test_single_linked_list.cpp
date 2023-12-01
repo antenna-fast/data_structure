@@ -49,8 +49,7 @@ void insertElem(Node* &head, int i, int value)
     if (i == 1)
     {
         // 创建结点
-        Node *newNode = new Node;
-        newNode -> value = value;
+        Node *newNode = new Node(value);
         // 插入
         newNode -> next = head;
         head = newNode;  // update head address
@@ -74,8 +73,7 @@ void insertElem(Node* &head, int i, int value)
         }
 
         // 创建新的node
-        Node *newNode = new Node;
-        newNode->value = value;
+        Node *newNode = new Node(value);
         // 插入
         newNode->next = tmp->next;  // tail part
         tmp->next = newNode;

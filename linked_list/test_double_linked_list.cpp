@@ -50,20 +50,23 @@ void insertNode(Node* &list, int posi, int val)
         int idx = 1;
         while (idx < posi-1)
         {
+            tmp = tmp->next;
             if(tmp == nullptr)
             {
                 cout << "overlength" << endl;
                 return;
             }
 
-            tmp = tmp->next;
             idx ++;
         }
         
         Node *newNode = new Node(val);
         newNode->next = tmp->next;
         newNode->prev = tmp;
-        tmp->prev = newNode;
+        if(tmp->next)  // if insert position not at tail
+        {
+            tmp->next->prev = newNode;
+        }
         tmp->next = newNode;
     }
 
@@ -81,15 +84,39 @@ int deleteNode(Node* &list, int posi)
     if(posi == 1)
     {
         Node* del = list;
+        int val = del->val;
         list = list->next;
         free(del);
+        return val;
     }
     else
     {
-        
+        Node* tmp = list;
+        // find prior node at del position
+        int idx=1;
+        while (idx < posi-1)
+        {
+            tmp = tmp->next;
+            if(tmp->next == nullptr)
+            {
+                cout << "overlength!" << endl;
+                return -1;
+            }
+            idx ++;
+        }
+
+        Node* del = tmp->next;
+        int val = del->val;
+        tmp->next = del->next;
+        if(del->next)  // if del not at tail
+        {
+            del->next->prev = tmp;
+        }
+        free(del);
+
+        return val;
     }
 
-    return 0;
 }
 
 int main()
@@ -108,6 +135,11 @@ int main()
     {
         cout << "tmp: " << tmp->val << endl;
         tmp = tmp->next;        
+    }
+    
+    for (size_t i = 1; i < 5; i++)
+    {
+        cout << "del: " << deleteNode(list, 1) << endl;
     }
     
     
