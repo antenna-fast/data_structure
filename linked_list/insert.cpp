@@ -11,12 +11,11 @@ typedef struct Node
 
 void insertNode(Node* &head, int idx, int val)
 {
-    // if insert at 1
+    // if insert at head
     if(idx == 1)
     {
         Node* n = new Node();
         n->val = val;
-        
         n->next = head;
         // cout << "after head->next" << endl;
         head = n; 

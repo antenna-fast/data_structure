@@ -5,6 +5,7 @@
 // array implementation of queue
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 

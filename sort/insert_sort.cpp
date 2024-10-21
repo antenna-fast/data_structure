@@ -1,3 +1,5 @@
+// ref: https://www.hello-algo.com/chapter_sorting/insertion_sort/#1143
+
 #include <iostream>
 #include <vector>
 
